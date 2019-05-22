@@ -1,11 +1,11 @@
 [package]
-name = "swap"
-description = "Atomically swap two files"
-homepage = "https://github.com/passcod/swap"
-repository = "https://github.com/passcod/swap.git"
-documentation = "https://github.com/passcod/swap.git"
+name = "swp"
+description = "Swap two paths, atomically or as close as"
+homepage = "https://github.com/passcod/swp"
+repository = "https://github.com/passcod/swp.git"
+documentation = "https://github.com/passcod/swp.git"
 authors = ["Félix Saparelli <felix@passcod.name>"]
-keywords = ["rename", "swap", "renameat2", "exchange", "linux"]
+keywords = ["rename", "swap", "renameat2", "exchange", "cross-platform"]
 categories = ["command-line-utilities"]
 
 version = "1.0.0"
