@@ -14,7 +14,7 @@ version = "0.2.55"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "swap"
+name = "swp"
 version = "1.0.0"
 dependencies = [
  "getopts 0.2.19 (registry+https://github.com/rust-lang/crates.io-index)",

@@ -5,6 +5,7 @@ homepage = "https://github.com/passcod/swp"
 repository = "https://github.com/passcod/swp.git"
 documentation = "https://github.com/passcod/swp.git"
 authors = ["Félix Saparelli <felix@passcod.name>"]
+license = "Artistic 2.0"
 keywords = ["rename", "swap", "renameat2", "exchange", "cross-platform"]
 categories = ["command-line-utilities"]
 
