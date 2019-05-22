@@ -32,12 +32,34 @@ Or use [a prebuilt release](https://github.com/passcod/swp/releases).
 
 ## Usage
 
-```bash
+```
 $ swp filea fileb
+```
 
-# Use -v to print out the paths on success:
-$ swp filea fileb
+With `-v`, it prints out the swapped paths on success:
+
+```
+$ swp -v filea fileb
 filea <-> fileb
+```
+
+The tool is also a library:
+
+```rust
+let a = PathBuf::from("filea");
+let b = PathBuf::from("fileb");
+
+swp::swap_paths(&a, &b)?;
+```
+
+And you can select one or more strategies if you don't want the default behaviour:
+
+```rust
+swp::swap_paths_custom(&a, &b, &[
+    swp::Strategy::RenameAt2,
+    swp::Strategy::ExchangeData,
+    swp::Strategy::TwoRenames,
+])?;
 ```
 
 ## About
