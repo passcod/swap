@@ -3,8 +3,12 @@ name = "swap"
 description = "Atomically swap two files"
 homepage = "https://github.com/passcod/swap"
 repository = "https://github.com/passcod/swap.git"
-version = "1.0.0"
+documentation = "https://github.com/passcod/swap.git"
 authors = ["Félix Saparelli <felix@passcod.name>"]
+keywords = ["rename", "swap", "renameat2", "exchange", "linux"]
+categories = ["command-line-utilities"]
+
+version = "1.0.0"
 edition = "2018"
 
 [dependencies]
