@@ -1,0 +1,12 @@
+[package]
+name = "swap"
+description = "Atomically swap two files"
+homepage = "https://github.com/passcod/swap"
+repository = "https://github.com/passcod/swap.git"
+version = "1.0.0"
+authors = ["Félix Saparelli <felix@passcod.name>"]
+edition = "2018"
+
+[dependencies]
+getopts = "0.2.19"
+libc = "0.2.55"
