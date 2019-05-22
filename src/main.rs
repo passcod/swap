@@ -1,16 +1,8 @@
 use getopts::Options;
-use libc::{c_char, c_int, c_uint, RENAME_EXCHANGE};
-use std::{env, ffi::CString, fs::File, os::unix::io::AsRawFd, process::exit};
+use std::{env, path::PathBuf, process::exit};
 
-extern "C" {
-    pub fn renameat2(
-        olddirfd: c_int,
-        oldpath: *const c_char,
-        newdirfd: c_int,
-        newpath: *const c_char,
-        flags: c_uint,
-    ) -> c_int;
-}
+pub mod strategy;
+pub use strategy::Strategy;
 
 fn print_usage(program: &str, opts: Options) {
     let brief = format!("Usage: {} [options] SOURCE DESTINATION", program);
@@ -47,34 +39,22 @@ fn main() {
         return;
     }
 
-    let input: Vec<&str> = if matches.free.is_empty() || matches.free.len() != 2 {
+    let input: Vec<PathBuf> = if matches.free.is_empty() || matches.free.len() != 2 {
         print_usage(&program, opts);
         exit(1);
     } else {
-        matches.free.iter().take(2).map(|s| s.as_str()).collect()
+        matches.free.iter().take(2).map(|s| s.into()).collect()
     };
 
-    let from = CString::new(input[0]).expect("bad source path");
-    let to = CString::new(input[1]).expect("bad destination path");
-
-    // Use the fd of the current directory to emulate the behaviour of rename(2)
-    let cdir = env::current_dir().expect("Failed to get at current dir");
-    let fdir = File::open(cdir).expect("Failed to open current dir");
-    let fd = fdir.as_raw_fd();
-
-    let ret = unsafe {
-        renameat2(
-            fd,
-            from.as_ptr(),
-            fd,
-            to.as_ptr(),
-            RENAME_EXCHANGE as c_uint,
-        )
-    };
-    if ret != 0 {
-        eprintln!("{}", std::io::Error::last_os_error());
-        exit(1);
-    } else if matches.opt_present("v") {
-        println!("{} <-> {}", input[0], input[1]);
+    match Strategy::RenameAt2.swap(&input[0], &input[1]) {
+        Ok(_) => {
+            if matches.opt_present("v") {
+                println!("{:?} <-> {:?}", input[0], input[1]);
+            }
+        }
+        Err(err) => {
+            eprintln!("{:?}", err);
+            exit(1);
+        }
     }
 }

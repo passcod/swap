@@ -55,12 +55,25 @@ swp::swap_paths(&a, &b)?;
 And you can select one or more strategies if you don't want the default behaviour:
 
 ```rust
-swp::swap_paths_custom(&a, &b, &[
+swp::swap_paths_with_strategies(&a, &b, &[
     swp::Strategy::RenameAt2,
     swp::Strategy::ExchangeData,
     swp::Strategy::TwoRenames,
 ])?;
 ```
+
+### Bindings
+
+There are official binding libraries for:
+
+ - [ ] C
+ - [ ] Node.js
+ - [ ] Ruby
+ - [ ] PHP
+
+You can also use a general dynlib `.so` or `.dll`.
+
+All these are available in the pre-built releases.
 
 ## About
 
